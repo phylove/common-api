@@ -9,7 +9,7 @@ class CommonApiServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        require_once __DIR__.'/../helpers/define.php';
+        // require_once __DIR__.'/../helpers/define.php';
     }
 
     /**
