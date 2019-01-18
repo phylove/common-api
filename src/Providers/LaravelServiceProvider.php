@@ -22,7 +22,7 @@ class LaravelServiceProvider extends ServiceProvider
 
         if(env('USE_COMMON_ROUTES', true)){
             // load routes
-            $this->loadRoutesFrom(__DIR__.'/routes.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
             // use routes middleware
             $this->app['router']->middleware('phy.auth', \Phy\CommonApi\Middleware\ValidTokenUser::class);
