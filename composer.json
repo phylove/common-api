@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Phy\\CommonApi\\CommonApiServiceProvider"
+                "Phy\\CommonApi\\Providers\\LaravelServiceProvider"
             ]
         }
     }
