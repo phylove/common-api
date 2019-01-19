@@ -25,7 +25,7 @@ class LumenServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
             // use routes middleware
-            $app->routeMiddleware('phy.auth', \Phy\CommonApi\Middleware\ValidTokenUser::class);
+            $this->app->routeMiddleware(['phy.auth'=> \Phy\Core\Middleware\ValidTokenUser::class]);
         }
     }
 }
