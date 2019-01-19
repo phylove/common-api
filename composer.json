@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-	"phylove/core-dev" : "1.3"
+	"phylove/core-dev" : "1.3.2"
     },
     "autoload": {
         "psr-4": {
