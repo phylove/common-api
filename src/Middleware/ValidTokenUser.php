@@ -1,6 +1,6 @@
 <?php
 
-namespace Phy\Core\Middleware;
+namespace Phy\CommonApi\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;

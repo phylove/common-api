@@ -25,6 +25,11 @@
             "providers": [
                 "Phy\\CommonApi\\Providers\\LaravelServiceProvider"
             ]
+        },
+        "lumen": {
+            "providers": [
+                "Phy\\CommonApi\\Providers\\LumenServiceProvider"
+            ]
         }
     }
 }
