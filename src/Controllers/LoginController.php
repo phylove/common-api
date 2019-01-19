@@ -38,7 +38,7 @@ class LoginController extends Controller
     function doLogout(Request $request)
     {
         try {
-            $doLogout = App::make('doLogout');
+            $doLogout = app()->make('doLogout');
             $result = $doLogout->execute([
                 "token" =>  $request->header('Authorization')
             ]);
