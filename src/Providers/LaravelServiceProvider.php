@@ -10,6 +10,14 @@ class LaravelServiceProvider extends ServiceProvider
     public function boot()
     {
         // load
+        $menuObject = service('getMenu');
+        $menuObject->add(1, 'Home', url('/'), 'fa-dashboard', false, [
+            $menuObject->addSubMenu(1, 'Dashboard', url('/'), 'fa-circle', false)
+        ]);
+
+        $menuObject->add(2, 'Kelola User', url('/'), 'fa-user', false, [
+            $menuObject->addSubMenu(1, 'Daftar User', url('/manage-user'), 'fa-circle', false)
+        ]);
     }
 
     /**

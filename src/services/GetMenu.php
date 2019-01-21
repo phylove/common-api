@@ -7,51 +7,53 @@ use Phy\Core\DefaultService;
 use Phy\Core\CoreException;
 use Phy\Core\Models\ApiToken;
 
-class GetMenu extends CoreService implements DefaultService {
+class GetMenu {
 
-    public $transaction = false;
+    private $menus = [];
+    protected static $instance = null;
 
-    public function getDescription()
-    {
-        return "Get Menu";
+    static public function getInstance() {
+        if (is_null(self::$instance)) {
+            $class = get_called_class();
+            self::$instance = new $class();
+        }
+        return self::$instance;
     }
 
-    public function prepare($input)
-    {
+
+    public function add($orderNo, $label, $url, $icon, $active, $submenus = []){
+    	$menu = [ 
+            'order_no' => $orderNo,
+            'label' => $label, 
+            'url' => $url,
+            'icon' => $icon,    
+            'active' => $active,
+            'sub' => $submenus,                        
+        ];
+    	
+        $this->menus[] =  $menu;
+        // usort($this->menus, 'sortByOrder');
+        
+        return $menu;
         
     }
+    public function addSubMenu($orderNo, $label, $url, $icon, $active, $submenus = []){
+    	$will_be_added = [ 
+            'order_no' => $orderNo,
+            'label' => $label, 
+            'url' => $url,
+            'icon' => $icon,    
+            'active' => $active,
+            'sub' => $submenus                      
+        ];    
+        
+        return $will_be_added;
+        
+    }    
 
-    public function process($input, $originalInput)
+    public function execute($input)
     {
-        return 
-        [
-            [
-                "label" => "Home",
-                "icon" => "fa-dashboard",
-                "active" => false,
-                "sub" =>
-                    [
-                        [
-                            "active" => false,
-                            "label" => "Dashboard",
-                            "url" => url("/")
-                        ],
-                    ]
-            ],
-            [
-                "label" => "Kelola User",
-                "icon" => "fa-dashboard",
-                "active" => false,
-                "sub" =>
-                    [
-                        [
-                            "active" => false,
-                            "label" => "Daftar User",
-                            "url" => url("/manage-user")
-                        ],
-                    ]
-            ]
-        ];
+        return $this->menus;
     }
 
 }
