@@ -8,14 +8,15 @@ use Phy\Core\CoreException;
 use Phy\Core\Models\ApiToken;
 use DB;
 
+/**
+ * Count User
+ * 
+ * @author Agung 
+ */
+
 class CountUsers extends CoreService implements DefaultService {
 
     public $transaction = false;
-
-    public function getDescription()
-    {
-        return "Count user list";
-    }
 
     public function prepare($input)
     {

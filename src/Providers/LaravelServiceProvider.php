@@ -28,6 +28,9 @@ class LaravelServiceProvider extends ServiceProvider
     public function register()
     {
 
+        //load migration
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        
         if(env('USE_COMMON_ROUTES', true)){
             // load routes
             $this->loadRoutesFrom(__DIR__.'/../routes.php');

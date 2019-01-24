@@ -7,14 +7,15 @@ use Phy\Core\DefaultService;
 use Phy\Core\CoreException;
 use Phy\Core\Models\User;
 
+/**
+ * Edit User
+ * 
+ * @author Agung 
+ */
+
 class EditUser extends CoreService implements DefaultService {
 
     public $transaction = true;
-
-    public function getDescription()
-    {
-        return "Edit User";
-    }
 
     public function prepare($input)
     {
