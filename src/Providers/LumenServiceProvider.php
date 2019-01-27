@@ -19,15 +19,13 @@ class LumenServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //load migration
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
 
         if(env('USE_COMMON_ROUTES', true)){
             // load routes
             $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
             // use routes middleware
-            $this->app->routeMiddleware(['phy.auth'=> \Phy\Core\Middleware\ValidTokenUser::class]);
+            $app->routeMiddleware('phy.auth', \Phy\CommonApi\Middleware\ValidTokenUser::class);
         }
     }
 }

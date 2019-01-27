@@ -10,14 +10,6 @@ class LaravelServiceProvider extends ServiceProvider
     public function boot()
     {
         // load
-        $menuObject = service('getMenu');
-        $menuObject->add(1, 'Home', url('/'), 'fa-dashboard', false, [
-            $menuObject->addSubMenu(1, 'Dashboard', url('/'), 'fa-circle', false)
-        ]);
-
-        $menuObject->add(2, 'Kelola User', url('/'), 'fa-user', false, [
-            $menuObject->addSubMenu(1, 'Daftar User', url('/manage-user'), 'fa-circle', false)
-        ]);
     }
 
     /**
@@ -28,15 +20,12 @@ class LaravelServiceProvider extends ServiceProvider
     public function register()
     {
 
-        //load migration
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
-        
         if(env('USE_COMMON_ROUTES', true)){
             // load routes
             $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
             // use routes middleware
-            $this->app['router']->aliasMiddleware('phy.auth', \Phy\Core\Middleware\ValidTokenUser::class);
+            $this->app['router']->aliasMiddleware('valid.token', \Phy\CommonApi\Middleware\ValidTokenUser::class);
         }
     }
 }

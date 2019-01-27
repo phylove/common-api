@@ -19,6 +19,8 @@ class LoginController extends Controller
             $payload['user_id'] = $result->id;
             $payload['username'] = $result->username;
             $payload['key'] = $result->key;
+            $payload['iat'] = time(); //waktu di buat
+            $payload['exp'] = time() + 3600; //satu jam
             $payload['session'] = [
                 "user_id" =>  $result->id,
                 "username" => $result->username
@@ -36,7 +38,7 @@ class LoginController extends Controller
     function doLogout(Request $request)
     {
         try {
-            $doLogout = app()->make('doLogout');
+            $doLogout = App::make('doLogout');
             $result = $doLogout->execute([
                 "token" =>  $request->header('Authorization')
             ]);

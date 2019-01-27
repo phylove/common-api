@@ -13,13 +13,16 @@ class ServiceController extends Controller
     public function service(Request $request)
     {
         try {
-            $service = $request->get('service_name');
-            
+            $classService = "App\\Service\\".$request->get('service_name');
+            if(!class_exists($classService)){
+                throw New CoreException("Service doesn't exists");
+            }
+
             $payload = $request->get('payload');
             $sessions = app()->make('sessions')->getSessionAll();
             $payload['session'] = $sessions;
             
-            $object = service($service);
+            $object = new $classService();
             $result = $object->execute($payload);
             return CoreResponse::ok($result);
 
