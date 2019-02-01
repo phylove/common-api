@@ -16,16 +16,7 @@ class LoginController extends Controller
         try {
             $loginAuth = app()->make('loginAuth');
             $result = $loginAuth->execute($request->all());
-            $payload['user_id'] = $result->id;
-            $payload['username'] = $result->username;
-            $payload['key'] = $result->key;
-            $payload['iat'] = time(); //waktu di buat
-            $payload['exp'] = time() + 3600; //satu jam
-            $payload['session'] = [
-                "user_id" =>  $result->id,
-                "username" => $result->username
-            ];
-            $output['token'] = JWT::encode($payload, env('JWT_SECRET', 'xxx'));
+            $output['token'] = JWT::encode($result, env('JWT_SECRET', 'xxx'));
 
         } catch (CoreException $ex){
             return CoreResponse::fail($ex);
@@ -38,7 +29,7 @@ class LoginController extends Controller
     function doLogout(Request $request)
     {
         try {
-            $doLogout = App::make('doLogout');
+            $doLogout = app()->make('doLogout');
             $result = $doLogout->execute([
                 "token" =>  $request->header('Authorization')
             ]);

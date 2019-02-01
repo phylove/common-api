@@ -7,53 +7,73 @@ use Phy\Core\DefaultService;
 use Phy\Core\CoreException;
 use Phy\Core\Models\ApiToken;
 
-class GetMenu {
+class GetMenu extends CoreService implements DefaultService {
 
-    private $menus = [];
-    protected static $instance = null;
+    public $transaction = false;
+    public $menus = [];
 
-    static public function getInstance() {
-        if (is_null(self::$instance)) {
-            $class = get_called_class();
-            self::$instance = new $class();
-        }
-        return self::$instance;
-    }
-
-
-    public function add($orderNo, $label, $url, $icon, $active, $submenus = []){
-    	$menu = [ 
+    /**
+     * 
+     * add menu 
+     * 
+     * @param string $orderNo no urut
+     * @param string $label
+     * @param string $icon
+     * @param string $task
+     * @param array array of submenu
+     * 
+     * @return void
+     * 
+     */
+    public function add($orderNo, $label, $url, $icon, $task, $submenus = []){
+        $menu = [ 
             'order_no' => $orderNo,
             'label' => $label, 
             'url' => $url,
             'icon' => $icon,    
-            'active' => $active,
+            'task' => $task,
             'sub' => $submenus,                        
         ];
-    	
         $this->menus[] =  $menu;
-        // usort($this->menus, 'sortByOrder');
-        
-        return $menu;
-        
     }
-    public function addSubMenu($orderNo, $label, $url, $icon, $active, $submenus = []){
-    	$will_be_added = [ 
+
+    public function addSubMenu($orderNo, $label, $url, $icon, $task, $submenus = []){
+        $submenu = [ 
             'order_no' => $orderNo,
             'label' => $label, 
             'url' => $url,
             'icon' => $icon,    
-            'active' => $active,
+            'task' => $task,
             'sub' => $submenus                      
-        ];    
-        
-        return $will_be_added;
+        ];   
+
+        return $submenu;
         
     }    
 
-    public function execute($input)
+    public function prepare($data)
     {
-        return $this->menus;
+
+    }
+
+    public function process($data, $originalData)
+    {
+        $menus = [];
+        $tasks = $data["session"]->tasks;
+        foreach($this->menus as $menu){
+            $subs = [];
+            foreach($menu["sub"] as $sub){
+                if(in_array($sub['task'], $tasks) or $sub['task']===true){
+                    $subs[] = $sub;
+                }
+            }
+            if(in_array($menu['task'], $tasks) or $sub['task']===true){
+                $menu["sub"] = $subs;
+                $menus[] = $menu;
+            }
+        }
+
+        return $menus;
     }
 
 }

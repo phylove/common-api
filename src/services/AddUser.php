@@ -37,6 +37,7 @@ class AddUser extends CoreService implements DefaultService {
         $user->email = $data["email"];
         $user->full_name = $data["full_name"];
         $user->password = password_hash($data["password"], PASSWORD_BCRYPT);
+        $user->role_default_id = $data["role_default_id"];
         $user->created_by = $data["session"]->user_id;
         $user->updated_by = $data["session"]->user_id;
         $user->created_at = DATE_TIME_ACCESS;
@@ -54,6 +55,7 @@ class AddUser extends CoreService implements DefaultService {
             "username" => "required",
             "email" => "required|email",
             "full_name" => "required",
+            "role_default_id" => "required",
             "password" => "required"
         ];
     }
