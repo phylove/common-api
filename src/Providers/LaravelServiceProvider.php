@@ -34,7 +34,7 @@ class LaravelServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
             // use routes middleware
-            $this->app['router']->aliasMiddleware('valid.token', \Phy\CommonApi\Middleware\ValidTokenUser::class);
+            $this->app['router']->aliasMiddleware('phy.auth', \Phy\CommonApi\Middleware\ValidTokenUser::class);
         }
     }
 }
