@@ -9,10 +9,10 @@ Route::group(['namespace' => 'Phy\CommonApi\Controllers', 'prefix' => '/api/v1']
         
     });
 
-    foreach(config('service.route.get') as $r) {
-        Route::get($r['path'], function (\Illuminate\Http\Request $request) use ($r){
-            return \Phy\CoreApi\CallService::execute($request->all(), $r['service']);
-        });
-    }
+    // foreach(config('service.route.get') as $r) {
+    //     Route::get($r['path'], function (\Illuminate\Http\Request $request) use ($r){
+    //         return \Phy\CoreApi\CallService::execute($request->all(), $r['service']);
+    //     });
+    // }
 
 });
