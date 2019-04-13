@@ -2,15 +2,16 @@
 
 namespace App\Service;
 
-use Phy\Core\CoreService;
-use Phy\Core\DefaultService;
-use Phy\Core\CoreException;
-use Phy\Core\Models\Role;
+use Phy\CoreApi\CoreService;
+use Phy\CoreApi\DefaultService;
+use Phy\CoreApi\CoreException;
+use Phy\CoreApi\Models\Role;
 use DB;
 
 class GetRolesForManageUser extends CoreService implements DefaultService {
 
     public $transaction = false;
+    public $task = "addUser";
 
     public function getDescription()
     {
@@ -24,8 +25,7 @@ class GetRolesForManageUser extends CoreService implements DefaultService {
 
     public function process($input, $originalInput)
     {
-        $sql = "SELECT id AS key_select, role_name AS value_select 
-            FROM phy_roles";
+        $sql = "SELECT id, role_name FROM roles";
         
         return DB::select($sql);
     }

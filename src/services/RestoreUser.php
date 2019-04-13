@@ -7,14 +7,14 @@ use Phy\CoreApi\DefaultService;
 use Phy\CoreApi\CoreException;
 use Phy\CoreApi\Models\User;
 
-class RemoveUser extends CoreService implements DefaultService {
+class RestoreUser extends CoreService implements DefaultService {
 
     public $transaction = true;
     public $task = "removeUser";
 
     public function getDescription()
     {
-        return "Remove User";
+        return "Restore User";
     }
 
     public function prepare($input)

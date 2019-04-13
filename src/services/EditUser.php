@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-use Phy\Core\CoreService;
-use Phy\Core\DefaultService;
-use Phy\Core\CoreException;
-use Phy\Core\Models\User;
+use Phy\CoreApi\CoreService;
+use Phy\CoreApi\DefaultService;
+use Phy\CoreApi\CoreException;
+use Phy\CoreApi\Models\User;
 
 /**
  * Edit User
@@ -16,6 +16,7 @@ use Phy\Core\Models\User;
 class EditUser extends CoreService implements DefaultService {
 
     public $transaction = true;
+    public $task = "editUser";
 
     public function prepare($input)
     {
@@ -28,7 +29,7 @@ class EditUser extends CoreService implements DefaultService {
         $user->full_name = $input["full_name"];
         $user->updated_by = $input["session"]->user_id;
         $user->updated_at = DATE_TIME_ACCESS;
-        $user->version = 0;
+        $user->version = $user->version+1;
         $user->save();
 
         return [ 

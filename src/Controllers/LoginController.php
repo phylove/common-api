@@ -3,8 +3,8 @@
 namespace Phy\CommonApi\Controllers;
 
 use App\Http\Controllers\Controller;
-use Phy\Core\CoreException;
-use Phy\Core\CoreResponse;
+use Phy\CoreApi\CoreException;
+use Phy\CoreApi\CoreResponse;
 use Illuminate\Http\Request;
 use Firebase\JWT\JWT;
 

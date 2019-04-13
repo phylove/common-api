@@ -2,14 +2,15 @@
 
 namespace App\Service;
 
-use Phy\Core\CoreService;
-use Phy\Core\DefaultService;
-use Phy\Core\CoreException;
-use Phy\Core\Models\User;
+use Phy\CoreApi\CoreService;
+use Phy\CoreApi\DefaultService;
+use Phy\CoreApi\CoreException;
+use Phy\CoreApi\Models\User;
 
 class ResetPassword extends CoreService implements DefaultService {
 
     public $transaction = true;
+    public $task = "resetPassword";
 
     public function getDescription()
     {

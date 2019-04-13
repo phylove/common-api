@@ -8,16 +8,16 @@ use Phy\CoreApi\CoreException;
 use Phy\CoreApi\Models\User;
 use DB;
 
-/**
- * Find User By Id
- * 
- * @author Agung 
- */
-
-class FindUserById extends CoreService implements DefaultService {
+class GetUser extends CoreService implements DefaultService {
 
     public $transaction = false;
     public $task = "viewUser";
+    public $system = true;
+
+    public function getDescription()
+    {
+        return "Get user list";
+    }
 
     public function prepare($input)
     {
@@ -26,7 +26,8 @@ class FindUserById extends CoreService implements DefaultService {
 
     public function process($input, $originalInput)
     {
-        return User::find($input["id"]);
+        return User::select("username","email","full_name")
+            ->paginate($input["limit"]);
     }
 
 }

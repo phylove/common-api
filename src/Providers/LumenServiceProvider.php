@@ -3,6 +3,9 @@
 namespace Phy\CommonApi\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
+use Phy\CoreApi\CallService;
+use Route;
 
 class LumenServiceProvider extends ServiceProvider
 {

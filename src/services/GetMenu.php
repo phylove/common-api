@@ -2,14 +2,15 @@
 
 namespace App\Service;
 
-use Phy\Core\CoreService;
-use Phy\Core\DefaultService;
-use Phy\Core\CoreException;
-use Phy\Core\Models\ApiToken;
+use Phy\CoreApi\CoreService;
+use Phy\CoreApi\DefaultService;
+use Phy\CoreApi\CoreException;
+use Phy\CoreApi\Models\ApiToken;
 
 class GetMenu extends CoreService implements DefaultService {
 
     public $transaction = false;
+    public $task = "";
     public $menus = [];
 
     /**
@@ -59,7 +60,7 @@ class GetMenu extends CoreService implements DefaultService {
     public function process($data, $originalData)
     {
         $menus = [];
-        $tasks = $data["session"]->tasks;
+        $tasks = isset($data["session"]->tasks)? $data["session"]->tasks : [];
         foreach($this->menus as $menu){
             $subs = [];
             foreach($menu["sub"] as $sub){

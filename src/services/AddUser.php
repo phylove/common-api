@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-use Phy\Core\CoreService;
-use Phy\Core\DefaultService;
-use Phy\Core\CoreException;
-use Phy\Core\Models\User;
+use Phy\CoreApi\CoreService;
+use Phy\CoreApi\DefaultService;
+use Phy\CoreApi\CoreException;
+use Phy\CoreApi\Models\User;
 
 /**
  * Add User
@@ -16,12 +16,13 @@ use Phy\Core\Models\User;
 class AddUser extends CoreService implements DefaultService {
 
     public $transaction = true;
+    public $task = "addUser";
 
     public function prepare($data)
     {
         $user = service_exec('findUserByIndex', ["username" => $data["username"]]);
         if(!is_null($user)){
-            $this->errorListValidation(["username" => ["Username sudah ada"] ]);
+            $this->errorListValidation(["username" => [__('message.unique.username')] ]);
         }
 
         $user = service_exec('findUserBySecondIndex', ["email" => $data["email"]]);
@@ -37,7 +38,7 @@ class AddUser extends CoreService implements DefaultService {
         $user->email = $data["email"];
         $user->full_name = $data["full_name"];
         $user->password = password_hash($data["password"], PASSWORD_BCRYPT);
-        $user->role_default_id = $data["role_default_id"];
+        $user->role_id = $data["role_id"];
         $user->created_by = $data["session"]->user_id;
         $user->updated_by = $data["session"]->user_id;
         $user->created_at = DATE_TIME_ACCESS;
@@ -45,8 +46,10 @@ class AddUser extends CoreService implements DefaultService {
         $user->version = 0;
         $user->save();
 
-
-        return $user;
+        return [ 
+            "user" => $user,
+            "success_message" => "Berhasil mengubah user ".$user->username
+        ];
     }
 
     public function rules()
@@ -55,7 +58,7 @@ class AddUser extends CoreService implements DefaultService {
             "username" => "required",
             "email" => "required|email",
             "full_name" => "required",
-            "role_default_id" => "required",
+            "role_id" => "required|numeric",
             "password" => "required"
         ];
     }
