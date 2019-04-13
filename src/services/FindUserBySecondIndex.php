@@ -5,7 +5,8 @@ namespace App\Service;
 use Phy\CoreApi\CoreService;
 use Phy\CoreApi\DefaultService;
 use Phy\CoreApi\CoreException;
-use Phy\CoreApi\Models\User;
+use App\Model\User;
+
 use DB;
 
 /**

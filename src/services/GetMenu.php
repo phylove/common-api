@@ -5,7 +5,7 @@ namespace App\Service;
 use Phy\CoreApi\CoreService;
 use Phy\CoreApi\DefaultService;
 use Phy\CoreApi\CoreException;
-use Phy\CoreApi\Models\ApiToken;
+use App\Model\ApiToken;
 
 class GetMenu extends CoreService implements DefaultService {
 

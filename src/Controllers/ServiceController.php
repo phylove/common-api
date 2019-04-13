@@ -13,13 +13,8 @@ class ServiceController extends Controller
 
     public function service(Request $request)
     {
-        try {
-            $input = $request->all();
-            $result = CallService::execute($input['payload'], $input['service_name']);
-            return CoreResponse::ok($result);
-        } catch (CoreException $ex){
-            return CoreResponse::fail($ex);
-        }
+        $input = $request->all();
+        return CallService::execute($input['payload'], $input['service_name']);
     }
 
 }

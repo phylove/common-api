@@ -5,7 +5,7 @@ namespace App\Service;
 use Phy\CoreApi\CoreService;
 use Phy\CoreApi\DefaultService;
 use Phy\CoreApi\CoreException;
-use Phy\CoreApi\Models\User;
+use App\Model\User;
 
 /**
  * Add User
@@ -20,6 +20,7 @@ class AddUser extends CoreService implements DefaultService {
 
     public function prepare($data)
     {
+        
         $user = service_exec('findUserByIndex', ["username" => $data["username"]]);
         if(!is_null($user)){
             $this->errorListValidation(["username" => [__('message.unique.username')] ]);
@@ -33,6 +34,7 @@ class AddUser extends CoreService implements DefaultService {
 
     public function process($data, $originalData)
     {
+        
         $user = new User();
         $user->username = $data["username"];
         $user->email = $data["email"];

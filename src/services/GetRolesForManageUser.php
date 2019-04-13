@@ -5,7 +5,8 @@ namespace App\Service;
 use Phy\CoreApi\CoreService;
 use Phy\CoreApi\DefaultService;
 use Phy\CoreApi\CoreException;
-use Phy\CoreApi\Models\Role;
+use App\Model\Role;
+
 use DB;
 
 class GetRolesForManageUser extends CoreService implements DefaultService {
