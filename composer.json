@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-	"phylove/core-api" : "^1.5"
+	"phylove/core-api" : "^1.6"
     },
     "autoload": {
         "psr-4": {
