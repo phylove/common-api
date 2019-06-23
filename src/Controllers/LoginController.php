@@ -17,11 +17,10 @@ class LoginController extends Controller
             $loginAuth = app()->make('loginAuth');
             $result = $loginAuth->execute($request->all());
             $output['token'] = JWT::encode($result, env('JWT_SECRET', 'xxx'));
-
+            $output['data'] = $result;
         } catch (CoreException $ex){
             return CoreResponse::fail($ex);
         }
-
         
         return CoreResponse::ok($output);
     }
