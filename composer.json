@@ -2,14 +2,12 @@
     "name": "phylove/common-api",
     "description": "Common API",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "agung",
-            "email": "agungskripsi05@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "agung",
+        "email": "agungskripsi05@gmail.com"
+    }],
     "require": {
-	"phylove/core-api" : "^1.6"
+        "phylove/core-api": "^1.7"
     },
     "autoload": {
         "psr-4": {

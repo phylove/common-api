@@ -22,20 +22,21 @@ class ValidTokenUser
         $token = $request->header('Authorization');
 
         if(is_null($token)){
-            return [
+            return response()->json([
                 'success' => false,
                 'error_token' => 'Token not found'
-            ];
+            ], 401);
         }
 
         try {
             $checkValidToken = app()->make('checkValidToken');
             $checkValidToken->execute(["token" => $token]);
         } catch(CoreException $ex) {
-            return [
+
+            return response()->json([
                 'success' => false,
                 'error_token' => $ex->getErrorMessage()
-            ];
+            ], 401);
         }
         
         return $next($request);
